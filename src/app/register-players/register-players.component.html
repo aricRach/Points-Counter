@@ -1,0 +1,16 @@
+<h1>register-player works!</h1>
+<form [formGroup]="registerPlayerForm" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="name">
+
+  <button type="submit" [disabled]="!registerPlayerForm.valid">submit</button>
+</form>
+
+<h3>new players:</h3>
+<div *ngFor="let player of newPlayers; index as i">
+
+  <div>{{player.name}}</div>
+  <span>
+    <button (click)="deleteNewPlayer(i)">delete</button>
+  </span>
+</div>
+<a [routerLink]="['/select-players']">go to select players</a>

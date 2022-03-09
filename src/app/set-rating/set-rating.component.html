@@ -1,0 +1,13 @@
+<h1>set-rating works!</h1>
+<div *ngFor="let user of chosenPlayersArray; index as i;">
+  <button (click)="subtractRating(i, true)">subtract win</button>
+  <button (click)="addRating(i, true)">add win</button>
+  <span>wins: {{user.wins}}</span>
+  <span>{{user.name}}</span>
+  <button (click)="subtractRating(i, false)">subtract lose</button>
+  <button (click)="addRating(i, false)">add lose</button>
+  <span>loses: {{user.loses}}</span>
+</div>
+
+<button (click)="onSave()">save</button>
+<button (click)="onDelete()">delete all saved data</button>

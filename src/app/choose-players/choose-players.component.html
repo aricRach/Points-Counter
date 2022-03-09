@@ -1,0 +1,17 @@
+<div *ngIf="!isSetRatingMode">
+  <h1>choose players</h1>
+  <div *ngFor="let player of optionalPlayers; index as i;">
+
+    <button (click)="addPlayerToChosen(i)">{{player.name}}</button>
+  </div>
+
+  <h3>chosen players</h3>
+  <div *ngFor="let player of chosenPlayers; index as i;">
+    <button (click)="backPlayerToList(i)">{{player.name}}</button>
+  </div>
+</div>
+<button (click)="toggleRatingMode()">{{linkName}}</button>
+
+<div *ngIf="isSetRatingMode">
+  <app-set-rating [notParticipantsPlayers]="notParticipantsPlayers" [chosenPlayersArray]="chosenPlayers"></app-set-rating>
+</div>
