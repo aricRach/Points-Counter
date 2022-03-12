@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {ChartType} from 'chart.js';
 import { MultiDataSet, Label } from 'ng2-charts';
 import {Player} from '../../models/player.model';
@@ -14,29 +14,17 @@ export class DoughnutChartComponent implements OnInit {
   doughnutChartData: MultiDataSet = [];
   doughnutChartType: ChartType = 'doughnut';
 
-  players: Player[] = [];
-
+  @Input() players: Player[] = [];
   constructor() {}
 
   ngOnInit(): void {
-    this.readPlayersFromLocalStorage();
     this.initChartVariables();
   }
 
   initChartVariables(): void {
     this.doughnutChartLabels = this.players.map(({name}) => name) as Label[];
     this.doughnutChartData = [this.players.map(player => {
-      const totalGames = player.wins + player.loses;
-      return totalGames ? +(player.wins * 100 / totalGames).toFixed(2) : 0;
+      return player.winPercentage;
     })];
-  }
-
-  readPlayersFromLocalStorage(): void {
-    if (localStorage.getItem('result')) {
-      const lastResult = localStorage.getItem('result');
-      if (lastResult) {
-        this.players = JSON.parse(lastResult) as Player[];
-      }
-    }
   }
 }

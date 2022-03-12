@@ -1,16 +1,20 @@
-<h1>register-player works!</h1>
+<div class="align-center">
+  <div>
+<h1>register new players</h1>
 <form [formGroup]="registerPlayerForm" (ngSubmit)="onSubmit()">
   <input type="text" formControlName="name">
-
-  <button type="submit" [disabled]="!registerPlayerForm.valid">submit</button>
+  <button class="submit-btn" mat-stroked-button color="primary" type="submit" [disabled]="!registerPlayerForm.valid">submit</button>
 </form>
 
 <h3>new players:</h3>
 <div *ngFor="let player of newPlayers; index as i">
-
-  <div>{{player.name}}</div>
+  <div class="new-registered-player">
+    <span>{{player.name}}</span>
   <span>
-    <button (click)="deleteNewPlayer(i)">delete</button>
+      <mat-icon class="delete-icon" (click)="deleteNewPlayer(i)" aria-hidden="false" aria-label="delete player icon">delete</mat-icon>
   </span>
+  </div>
 </div>
-<a [routerLink]="['/select-players']">go to select players</a>
+<a class="next-page-btn" mat-raised-button color="primary" [routerLink]="['/select-players']">go to select players</a>
+</div>
+</div>

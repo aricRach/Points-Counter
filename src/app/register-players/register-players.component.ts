@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Player} from '../models/player.model';
 import {PlayersService} from '../state/players.service';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-register-player',
@@ -15,7 +14,7 @@ export class RegisterPlayersComponent implements OnInit {
   registerPlayerForm = new FormGroup({
     name: new FormControl('', Validators.required)
   });
-  private subscriber = new Subscription();
+  // private subscriber = new Subscription();
 
 
   get name(): string {
@@ -25,15 +24,15 @@ export class RegisterPlayersComponent implements OnInit {
   constructor(private playersService: PlayersService) {}
 
   ngOnInit(): void {
-    this.subscribeToPlayers();
+    // this.subscribeToPlayers();
   }
 
-  subscribeToPlayers(): void {
-    const subscription = this.playersService.players$.subscribe((players: Player[]) => {
-      this.newPlayers = players;
-    });
-    this.subscriber.add(subscription);
-  }
+  // subscribeToPlayers(): void {
+  //   const subscription = this.playersService.players$.subscribe((players: Player[]) => {
+  //     this.newPlayers = players;
+  //   });
+  //   this.subscriber.add(subscription);
+  // }
 
   deleteNewPlayer(index: number): void {
     this.newPlayers = this.newPlayers.filter((player: Player) => {
@@ -43,7 +42,7 @@ export class RegisterPlayersComponent implements OnInit {
   }
 
   onSubmit(): void {
-    this.newPlayers.push({name: this.name, wins: 0, loses: 0});
+    this.newPlayers.push({name: this.name, wins: 0, loses: 0, draws: 0});
     this.playersService.emitPlayersChange(this.newPlayers);
     this.registerPlayerForm.reset();
   }

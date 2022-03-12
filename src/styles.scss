@@ -1,2 +1,16 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 /* You can add global styles to this file, and also import other style files */
+.align-center {
+  display: flex;
+  justify-content: center;
+}
+.snackbar-success-dialog {
+  color: white !important;
+  .mat-simple-snackbar-action {
+    color: white !important;
+  }
+}
+
+mat-icon {
+  cursor: pointer;
+}

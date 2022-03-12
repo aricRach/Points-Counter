@@ -1,11 +1,8 @@
-<div *ngIf="players.length; else noPlayers" class="chart-wrapper">
+<div *ngIf="players.length" class="chart-wrapper">
   <canvas baseChart
           [data]="doughnutChartData"
           [labels]="doughnutChartLabels"
-          [chartType]="doughnutChartType">
+          [chartType]="doughnutChartType"
+          [height]="100">
   </canvas>
 </div>
-
-<ng-template #noPlayers>
-  <h1 *ngIf="!players.length">there is no players statistics to show, please add players set rating and save</h1>
-  </ng-template>

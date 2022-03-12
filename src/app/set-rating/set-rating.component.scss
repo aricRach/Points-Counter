@@ -1,0 +1,29 @@
+.rating {
+  display: flex;
+  flex-direction: column;
+}
+
+.player {
+  display: flex;
+  align-items: center;
+}
+
+.player-name-and-draw {
+  margin: 1rem;
+
+  .player-name {
+    font-size: 2rem;
+    color: #368ea4;
+  }
+
+  .draw-icon {
+    margin-left: 1rem;
+  }
+}
+
+.action-btn {
+  margin-top: 1rem;
+}
+//::ng-deep snack-bar-container simple-snack-bar .mat-simple-snackbar-action {
+//  color: black;
+//}

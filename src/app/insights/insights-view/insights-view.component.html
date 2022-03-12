@@ -1,11 +1,13 @@
-<div>
-<select [(ngModel)]="selectView">
+<div *ngIf="players.length; else noPlayers">
+<select class="toggle-mode" [(ngModel)]="selectedView">
   <option *ngFor="let view of viewOptions" [value]="view">{{view}}</option>
 </select>
-<h1>{{selectView}}</h1>
-  <app-doughnut-chart></app-doughnut-chart>
+<h1 class="view-mode">{{selectedView}}</h1>
+  <app-doughnut-chart *ngIf="selectedView === 'chart'" [players] = players></app-doughnut-chart>
 </div>
 
-<div>
-  <button mat-button>Basic</button>
-</div>
+<app-table *ngIf="selectedView === 'table'" [players] = players></app-table>
+
+<ng-template #noPlayers>
+  <h1 *ngIf="!players.length">there is no players statistics to show, please add players set rating and save</h1>
+</ng-template>

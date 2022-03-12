@@ -11,7 +11,7 @@ import {CommonModule} from '@angular/common';
   imports: [
     CommonModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
   ],
   declarations: [
     DeleteModalComponent

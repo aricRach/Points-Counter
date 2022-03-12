@@ -1,0 +1,16 @@
+.left-side-navigator-container {
+  height: 85vh;
+  background-color: white;
+
+  .navigation-link {
+    display: block;
+  }
+
+
+  a {
+    color: blue;
+    text-decoration: none; /* no underline */
+    width: 100%;
+  }
+
+}

@@ -13,6 +13,13 @@ import { InsightsViewComponent } from './insights/insights-view/insights-view.co
 import { MatButtonModule } from '@angular/material/button';
 import {ModalsModule} from './modals/modals.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { TableComponent } from './insights/table/table.component';
+import {MatTableModule} from '@angular/material/table';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { LeftSideNavigatorComponent } from './left-side-navigator/left-side-navigator.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -22,6 +29,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     SetRatingComponent,
     DoughnutChartComponent,
     InsightsViewComponent,
+    TableComponent,
+    LeftSideNavigatorComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -31,7 +40,12 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     ChartsModule,
     FormsModule,
     ModalsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatSnackBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

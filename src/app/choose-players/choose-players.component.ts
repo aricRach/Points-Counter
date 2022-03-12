@@ -11,9 +11,7 @@ import {Subscription} from 'rxjs';
 export class ChoosePlayersComponent implements OnInit, OnDestroy {
 
   optionalPlayers: Player[] = [];
-
   chosenPlayers: Player[] = [];
-
   notParticipantsPlayers: Player[] = [];
 
   isSetRatingMode = false;
@@ -35,7 +33,20 @@ export class ChoosePlayersComponent implements OnInit, OnDestroy {
     if (localStorage.getItem('result')) {
       const lastResult = localStorage.getItem('result');
       if (lastResult) {
-        this.optionalPlayers = [...this.optionalPlayers, ...JSON.parse(lastResult) as Player[]] ;
+        const lastResultArray = JSON.parse(lastResult) as Player[];
+        this.addPlayersFromStorage(lastResultArray);
+      }
+    }
+  }
+
+  private addPlayersFromStorage(lastResultArray: Player[]): void {
+    for ( const item of lastResultArray) {
+      const foundIndex = this.optionalPlayers.findIndex((player) => player.name === item.name);
+      if ( foundIndex === -1) {
+        this.optionalPlayers.push(item);
+      } else { // the player already exist
+        // prefer the player from the storage instead of the new one with the same name
+        this.optionalPlayers[foundIndex] = item;
       }
     }
   }
@@ -58,7 +69,7 @@ export class ChoosePlayersComponent implements OnInit, OnDestroy {
     });
   }
 
-  backPlayerToList(i: number): void {
+  backPlayerToOptionalList(i: number): void {
     this.optionalPlayers.push(this.chosenPlayers[i]);
     this.chosenPlayers = this.chosenPlayers.filter((player: Player) => {
       return player !== this.chosenPlayers[i];
@@ -70,15 +81,15 @@ export class ChoosePlayersComponent implements OnInit, OnDestroy {
     this.isSetRatingMode = !this.isSetRatingMode;
   }
 
-  ngOnDestroy(): void {
-    this.subscriber.unsubscribe();
-  }
-
    getNotParticipantsPlayers(): any[] {
-    const nonPartic = this.optionalPlayers.filter((element) => {
+    const notParticipate = this.optionalPlayers.filter((element) => {
       return this.chosenPlayers.indexOf(element) === -1;
     });
-    console.log('not:' + nonPartic);
-    return nonPartic;
+    this.optionalPlayers = notParticipate;
+    return notParticipate;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriber.unsubscribe();
   }
 }

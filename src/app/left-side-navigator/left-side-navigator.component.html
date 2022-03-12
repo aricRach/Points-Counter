@@ -1,0 +1,17 @@
+<mat-drawer-container class="left-side-navigator-container">
+  <mat-drawer class="left-side-navigator" mode="side" opened>
+    <div class="navigation-link">
+    <a mat-button [routerLink]="['register-players']"> register players</a>
+    </div>
+    <div class="navigation-link">
+      <a mat-button [routerLink]="['select-players']">select players</a>
+    </div>
+    <div class="navigation-link">
+      <a mat-button [routerLink]="['view-insights']"> view insight</a>
+    </div>
+  </mat-drawer>
+  <mat-drawer-content>
+    <router-outlet></router-outlet>
+
+  </mat-drawer-content>
+</mat-drawer-container>
