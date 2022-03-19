@@ -1,8 +1,8 @@
 <div *ngIf="players.length" class="chart-wrapper">
-  <canvas baseChart
+  <canvas class="chart" baseChart
           [data]="doughnutChartData"
           [labels]="doughnutChartLabels"
           [chartType]="doughnutChartType"
-          [height]="100">
+          height="100">
   </canvas>
 </div>

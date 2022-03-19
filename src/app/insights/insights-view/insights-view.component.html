@@ -3,10 +3,10 @@
   <option *ngFor="let view of viewOptions" [value]="view">{{view}}</option>
 </select>
 <h1 class="view-mode">{{selectedView}}</h1>
-  <app-doughnut-chart *ngIf="selectedView === 'chart'" [players] = players></app-doughnut-chart>
+  <app-doughnut-chart *ngIf="selectedView === 'chart'" [players]=players></app-doughnut-chart>
 </div>
 
-<app-table *ngIf="selectedView === 'table'" [players] = players></app-table>
+<app-table *ngIf="selectedView === 'table'" [players]=players></app-table>
 
 <ng-template #noPlayers>
   <h1 *ngIf="!players.length">there is no players statistics to show, please add players set rating and save</h1>

@@ -1,5 +1,5 @@
 <mat-drawer-container class="left-side-navigator-container">
-  <mat-drawer class="left-side-navigator" mode="side" opened>
+  <mat-drawer #drawer class="left-side-navigator" mode="side" opened>
     <div class="navigation-link">
     <a mat-button [routerLink]="['register-players']"> register players</a>
     </div>
@@ -11,7 +11,11 @@
     </div>
   </mat-drawer>
   <mat-drawer-content>
+    <button mat-raised-button (click)="drawer.toggle(); isOpen=!isOpen">
+      <mat-icon *ngIf="isOpen">keyboard_arrow_left</mat-icon>
+      <mat-icon *ngIf="!isOpen">keyboard_arrow_right</mat-icon>
+      Toggle menu
+    </button>
     <router-outlet></router-outlet>
-
   </mat-drawer-content>
 </mat-drawer-container>
