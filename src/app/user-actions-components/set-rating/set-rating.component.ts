@@ -1,8 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Player} from '../models/player.model';
-import {PlayersService} from '../state/players.service';
+import {Player} from '../../models/player.model';
+import {PlayersService} from '../../services/players.service';
 import {Router} from '@angular/router';
-import {ModalsService} from '../modals/services/modals.service';
+import {ModalsService} from '../../modals/services/modals.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
@@ -29,19 +29,18 @@ export class SetRatingComponent implements OnInit {
   }
 
   subtractRating(userIndex: number, isVictory: boolean): void {
-      if (!isVictory) {
-        const currentLoses = this.chosenPlayersArray[userIndex].loses;
-        this.chosenPlayersArray[userIndex].loses = currentLoses === 0 ? 0 : currentLoses - 1;
-      } else {
-        const currentWins = this.chosenPlayersArray[userIndex].wins;
-        this.chosenPlayersArray[userIndex].wins = currentWins === 0 ? 0 : currentWins - 1;
+    if (!isVictory) {
+      const currentLoses = this.chosenPlayersArray[userIndex].loses;
+      this.chosenPlayersArray[userIndex].loses = currentLoses === 0 ? 0 : currentLoses - 1;
+    } else {
+      const currentWins = this.chosenPlayersArray[userIndex].wins;
+      this.chosenPlayersArray[userIndex].wins = currentWins === 0 ? 0 : currentWins - 1;
     }
   }
 
   onSave(): void {
     const allPlayers = [...this.chosenPlayersArray, ...this.notParticipantsPlayers];
-    localStorage.setItem('result', JSON.stringify(allPlayers));
-    this.playersService.emitPlayersChange(allPlayers);
+    this.playersService.savePlayers(allPlayers);
     this._snackBar.open('data saved', 'close', {
       duration: 1500,
       panelClass: 'snackbar-success-dialog'
@@ -49,10 +48,10 @@ export class SetRatingComponent implements OnInit {
   }
 
   onDelete(): void {
-    this.modalsService.openDeleteDialog().afterClosed().subscribe(res => {
+    this.modalsService.openDeleteDialog('all your data will be deleted and you wont be able to restore').
+    afterClosed().subscribe(res => {
       if (res === 'delete') {
         localStorage.removeItem('result');
-        this.playersService.emitPlayersChange([]);
         this.router.navigate(['/register-players']);
       }
     });

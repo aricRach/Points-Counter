@@ -1,6 +1,5 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PlayersService} from '../../state/players.service';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {PlayersService} from '../../services/players.service';
 import {Player} from '../../models/player.model';
 
 @Component({
@@ -8,7 +7,7 @@ import {Player} from '../../models/player.model';
   templateUrl: './insights-view.component.html',
   styleUrls: ['./insights-view.component.scss']
 })
-export class InsightsViewComponent implements OnInit, OnDestroy {
+export class InsightsViewComponent implements OnInit {
 
   viewOptions = ['chart', 'table'];
   selectedView = this.viewOptions[0];
@@ -18,31 +17,12 @@ export class InsightsViewComponent implements OnInit, OnDestroy {
   get players(): Player[] {
     return this._players;
   }
-  private subscriber = new Subscription();
 
-  constructor(private playersService: PlayersService) {
-    this.subscribeToPlayers();
-  }
+  constructor(private playersService: PlayersService) {}
 
   ngOnInit(): void {
-    this.readPlayersFromLocalStorage();
+    this._players = this.playersService.readPlayersFromLocalStorage();
     this.setWinPercentage();
-  }
-
-  subscribeToPlayers(): void {
-    const subscription = this.playersService.players$.subscribe((players: Player[]) => {
-      this._players = players;
-    });
-    this.subscriber.add(subscription);
-  }
-
-  readPlayersFromLocalStorage(): void {
-    if (localStorage.getItem('result')) {
-      const lastResult = localStorage.getItem('result');
-      if (lastResult) {
-        this._players =  [...JSON.parse(lastResult) as Player[]];
-      }
-    }
   }
 
   setWinPercentage(): void {
@@ -50,9 +30,5 @@ export class InsightsViewComponent implements OnInit, OnDestroy {
       const totalGames = player.wins + player.loses + player.draws;
       player.winPercentage = totalGames ? +(((player.wins + (player.draws / 2)) * 100) / totalGames).toFixed(2) : 0;
     });
-  }
-
-  ngOnDestroy(): void {
-    this.subscriber.unsubscribe();
   }
 }

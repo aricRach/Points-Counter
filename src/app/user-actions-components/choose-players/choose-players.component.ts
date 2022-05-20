@@ -1,14 +1,13 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Player} from '../models/player.model';
-import {PlayersService} from '../state/players.service';
-import {Subscription} from 'rxjs';
+import {Component, OnInit} from '@angular/core';
+import {Player} from '../../models/player.model';
+import {PlayersService} from '../../services/players.service';
 
 @Component({
   selector: 'app-choose-players',
   templateUrl: './choose-players.component.html',
   styleUrls: ['./choose-players.component.scss']
 })
-export class ChoosePlayersComponent implements OnInit, OnDestroy {
+export class ChoosePlayersComponent implements OnInit {
 
   optionalPlayers: Player[] = [];
   chosenPlayers: Player[] = [];
@@ -18,48 +17,16 @@ export class ChoosePlayersComponent implements OnInit, OnDestroy {
 
   private _linkName: string;
 
-  private subscriber = new Subscription();
-
   constructor(private playersService: PlayersService) {
     this._linkName = 'set ratings';
   }
 
   ngOnInit(): void {
-    this.subscribeToPlayers();
-    this.readPlayers();
-  }
-
-  readPlayers(): void {
-    if (localStorage.getItem('result')) {
-      const lastResult = localStorage.getItem('result');
-      if (lastResult) {
-        const lastResultArray = JSON.parse(lastResult) as Player[];
-        this.addPlayersFromStorage(lastResultArray);
-      }
-    }
-  }
-
-  private addPlayersFromStorage(lastResultArray: Player[]): void {
-    for ( const item of lastResultArray) {
-      const foundIndex = this.optionalPlayers.findIndex((player) => player.name === item.name);
-      if ( foundIndex === -1) {
-        this.optionalPlayers.push(item);
-      } else { // the player already exist
-        // prefer the player from the storage instead of the new one with the same name
-        this.optionalPlayers[foundIndex] = item;
-      }
-    }
+    this.optionalPlayers = this.playersService.readPlayersFromLocalStorage();
   }
 
   get linkName(): string {
     return !this.isSetRatingMode ? 'set ratings' : 'choose players';
-  }
-
-  subscribeToPlayers(): void {
-    const subscription = this.playersService.players$.subscribe((players: Player[]) => {
-      this.optionalPlayers = players;
-    });
-    this.subscriber.add(subscription);
   }
 
   addPlayerToChosen(i: number): void {
@@ -87,9 +54,5 @@ export class ChoosePlayersComponent implements OnInit, OnDestroy {
     });
     this.optionalPlayers = notParticipate;
     return notParticipate;
-  }
-
-  ngOnDestroy(): void {
-    this.subscriber.unsubscribe();
   }
 }

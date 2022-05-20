@@ -9,10 +9,14 @@ export class ModalsService {
 
   constructor(private dialog: MatDialog) { }
 
-  openDeleteDialog(): MatDialogRef<DeleteModalComponent> {
+  openDeleteDialog(message: string, title?: string): MatDialogRef<DeleteModalComponent> {
     return this.dialog.open(DeleteModalComponent, {
       width: '300px',
-      height: '280px',
+      height: '240px',
+      data: {
+        title : title || 'are you sure?',
+        message
+      }
     });
   }
 }

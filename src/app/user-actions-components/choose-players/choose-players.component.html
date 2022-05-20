@@ -1,12 +1,12 @@
 <div class="align-center">
   <div>
     <div *ngIf="!isSetRatingMode">
-      <h1>choose players</h1>
+      <h1>Choose players</h1>
       <div *ngFor="let player of optionalPlayers; index as i;">
         <button (click)="addPlayerToChosen(i)" mat-stroked-button color="accent">{{player.name}}</button>
       </div>
 
-      <h3>chosen players</h3>
+      <h3 class="section">Participants</h3>
       <div *ngFor="let player of chosenPlayers; index as i;">
         <button (click)="backPlayerToOptionalList(i)" mat-stroked-button color="primary">{{player.name}}</button>
       </div>
