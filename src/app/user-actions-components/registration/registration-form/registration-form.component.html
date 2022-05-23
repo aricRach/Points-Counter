@@ -1,0 +1,5 @@
+<h1>Register players</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input type="text" formControlName="name">
+  <button class="submit-btn" mat-stroked-button color="primary" type="submit" [disabled]="!form.valid">submit</button>
+</form>

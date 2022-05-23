@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RegisterPlayersComponent} from './register-players/register-players.component';
+import {RegisterPlayersComponent} from './registration/register-players/register-players.component';
 import {ChoosePlayersComponent} from './choose-players/choose-players.component';
 import {SetRatingComponent} from './set-rating/set-rating.component';
 import {MatButtonModule} from '@angular/material/button';
@@ -9,12 +9,16 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from '../app-routing.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {RegistrationFormComponent} from './registration/registration-form/registration-form.component';
+import { AvailablePlayersComponent } from './registration/available-players/available-players.component';
 
 @NgModule({
   declarations: [
     RegisterPlayersComponent,
     ChoosePlayersComponent,
     SetRatingComponent,
+    RegistrationFormComponent,
+    AvailablePlayersComponent
   ],
   imports: [
     CommonModule,

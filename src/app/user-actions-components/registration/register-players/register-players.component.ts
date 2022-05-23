@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Player} from '../../models/player.model';
-import {PlayersService} from '../../services/players.service';
-import {ModalsService} from '../../modals/services/modals.service';
+import {Player} from '../../../models/player.model';
+import {PlayersService} from '../../../services/players.service';
+import {ModalsService} from '../../../modals/services/modals.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({

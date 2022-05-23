@@ -1,0 +1,19 @@
+<div class="align-center">
+  <div>
+<app-registration-form [form]="registerPlayerForm" (formSubmitted)="onSubmit()"></app-registration-form>
+    <p></p>
+
+
+<app-available-players [players]="allPlayers" (PlayerDeleted)="deleteNewPlayer($event)"></app-available-players>
+
+    <a
+      class="next-page-btn"
+      matTooltip="save your modified data and continue to select players"
+      mat-raised-button
+      color="primary"
+      (click)="savePlayers()"
+      [routerLink]="['/select-players']">
+      save and continue
+    </a>
+</div>
+</div>
