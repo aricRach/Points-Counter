@@ -2,20 +2,22 @@
   <div class="registration-page" >
 
     <div class="section">
-    <h1>Registration</h1>
+      <h1>Registration</h1>
     </div>
 
     <div class="section">
-    <app-game-name-input [games]="games" [optionName]="currentGameName"></app-game-name-input>
+      <app-game-name-input [games]="games" [optionName]="currentGameName"></app-game-name-input>
     </div>
 
-    <h3>Register players for '{{playersService._gameName | async | uppercase}}'</h3>
+    <div *ngIf="currentGameName">
+      <div class="section">
+        <app-registration-form [form]="registerPlayerForm" (formSubmitted)="onSubmit()"></app-registration-form>
+      </div>
 
-    <div class="section">
-    <app-registration-form *ngIf="currentGameName" [form]="registerPlayerForm" (formSubmitted)="onSubmit()"></app-registration-form>
+      <div class="section">
+      <app-available-players [players]="allPlayers" (PlayerDeleted)="deleteNewPlayer($event)"></app-available-players>
+      </div>
     </div>
-
-    <app-available-players *ngIf="currentGameName" [players]="allPlayers" (PlayerDeleted)="deleteNewPlayer($event)"></app-available-players>
 
     <a
       class="next-page-btn"
@@ -28,7 +30,6 @@
     </a>
 
     <button (click)="deleteAllGamesData()" mat-stroked-button color="warn">delete all saved data</button>
-
   </div>
 </div>
 

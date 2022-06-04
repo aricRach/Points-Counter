@@ -1,4 +1,4 @@
-
+<h3>Register players for '{{playersService._gameName | async | uppercase}}'</h3>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
   <input type="text" formControlName="name">
   <button class="submit-btn" mat-stroked-button color="primary" type="submit" [disabled]="!form.valid">submit</button>
