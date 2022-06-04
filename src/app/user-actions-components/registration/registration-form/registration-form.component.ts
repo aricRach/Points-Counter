@@ -1,19 +1,16 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, Input, Output, EventEmitter} from '@angular/core';
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
   styleUrls: ['./registration-form.component.scss']
 })
-export class RegistrationFormComponent implements OnInit {
+export class RegistrationFormComponent {
 
   @Input() form: any;
 
   @Output() formSubmitted = new EventEmitter();
   constructor() { }
-
-  ngOnInit(): void {
-  }
 
   onSubmit(): void {
     this.formSubmitted.emit();

@@ -11,6 +11,7 @@ import {AppRoutingModule} from '../app-routing.module';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {RegistrationFormComponent} from './registration/registration-form/registration-form.component';
 import { AvailablePlayersComponent } from './registration/available-players/available-players.component';
+import { GameNameInputComponent } from './registration/game-name-input/game-name-input.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { AvailablePlayersComponent } from './registration/available-players/avai
     ChoosePlayersComponent,
     SetRatingComponent,
     RegistrationFormComponent,
-    AvailablePlayersComponent
+    AvailablePlayersComponent,
+    GameNameInputComponent
   ],
   imports: [
     CommonModule,

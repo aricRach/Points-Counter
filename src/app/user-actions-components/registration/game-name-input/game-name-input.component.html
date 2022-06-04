@@ -1,0 +1,13 @@
+<h3>create new game or choose from the list</h3>
+<div class="items-in-row">
+<form (submit)="setGameName(newName)" ngForm>
+  <div class="items-in-row">
+    <input class="new-game-input" name="newGame" required [(ngModel)]="newName" type="text">
+    <button type="submit">create</button>
+  </div>
+</form>
+
+<select class="select-game-options" (ngModelChange)="loadGameName($event)" [(ngModel)]="optionName">
+  <option [value]="gameName" *ngFor="let gameName of games">{{gameName}}</option>
+</select>
+</div>
