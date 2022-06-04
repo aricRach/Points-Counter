@@ -3,7 +3,7 @@ import {Player} from '../../models/player.model';
 import {PlayersService} from '../../services/players.service';
 import {Router} from '@angular/router';
 import {ModalsService} from '../../modals/services/modals.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import {AlertsService} from '../../services/alerts.service';
 
 @Component({
   selector: 'app-set-rating',
@@ -15,8 +15,8 @@ export class SetRatingComponent implements OnInit {
   @Input() chosenPlayersArray: Player[] = [];
   @Input() notParticipantsPlayers: Player[] = [];
 
-  constructor(private router: Router, private playersService: PlayersService,
-              private modalsService: ModalsService, private _snackBar: MatSnackBar) { }
+  constructor(private router: Router, public playersService: PlayersService,
+              private modalsService: ModalsService, private alertsService: AlertsService) { }
 
   ngOnInit(): void {}
 
@@ -41,17 +41,14 @@ export class SetRatingComponent implements OnInit {
   onSave(): void {
     const allPlayers = [...this.chosenPlayersArray, ...this.notParticipantsPlayers];
     this.playersService.savePlayers(allPlayers);
-    this._snackBar.open('data saved', 'close', {
-      duration: 1500,
-      panelClass: 'snackbar-success-dialog'
-    });
+    this.alertsService.showSuccess('data saved');
   }
 
   onDelete(): void {
     this.modalsService.openDeleteDialog('all your data will be deleted and you wont be able to restore').
     afterClosed().subscribe(res => {
       if (res === 'delete') {
-        localStorage.removeItem('result');
+        this.playersService.deleteCurrentGameData();
         this.router.navigate(['/register-players']);
       }
     });

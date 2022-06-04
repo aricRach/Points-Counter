@@ -18,3 +18,17 @@ mat-icon {
 .dialog-header {
   border-bottom: 1px solid black;
 }
+
+.section {
+  margin-top: 1rem;
+}
+
+.items-in-row {
+  display: flex;
+}
+
+@media only screen and (max-width: 600px) {
+  .registration-page {
+    margin-left: 0.7rem;
+  }
+}

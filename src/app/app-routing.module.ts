@@ -7,8 +7,8 @@ import {InsightsViewComponent} from './insights/insights-view/insights-view.comp
 
 const routes: Routes = [
   {path: '', component: RegisterPlayersComponent},
-  {path: 'select-players', component: ChoosePlayersComponent},
   {path: 'register-players', component: RegisterPlayersComponent},
+  {path: 'select-players', component: ChoosePlayersComponent},
   {path: 'set-rating', component: SetRatingComponent},
   {path: 'view-insights', component: InsightsViewComponent},
 ];

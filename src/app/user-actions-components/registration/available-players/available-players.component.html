@@ -1,9 +1,15 @@
-<h3>Available players:</h3>
+<h3 class="section">Available players:</h3>
 <div *ngFor="let player of players; index as i">
   <div class="new-registered-player">
     <span>{{player.name}}</span>
     <span>
-      <mat-icon class="delete-icon" (click)="onDeletePlayer(i)" aria-hidden="false" aria-label="delete player icon">delete</mat-icon>
+      <mat-icon
+        class="delete-icon"
+        (click)="onDeletePlayer(i)"
+        aria-hidden="false"
+        aria-label="delete player icon">
+        delete
+      </mat-icon>
   </span>
   </div>
 </div>
