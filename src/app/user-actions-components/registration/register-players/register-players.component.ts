@@ -6,6 +6,7 @@ import {ModalsService} from '../../../modals/services/modals.service';
 import {Subscription} from 'rxjs';
 import {Router} from '@angular/router';
 import {AlertsService} from '../../../services/alerts.service';
+import {MenuModeService} from '../../../services/menu-mode.service';
 
 @Component({
   selector: 'app-register-player',
@@ -27,10 +28,9 @@ export class RegisterPlayersComponent implements OnInit, OnDestroy {
   }
 
   constructor(public playersService: PlayersService, private modalsService: ModalsService,
-              private router: Router, private alertsService: AlertsService) {}
+              private router: Router, private alertsService: AlertsService, private menuModeService: MenuModeService) {}
 
   ngOnInit(): void {
-    // this.allPlayers = this.playersService.readPlayersFromLocalStorage() || [];
     this.games = this.playersService.readGamesFromLocalStorage();
     this.subscribeToGameName();
   }
@@ -70,6 +70,7 @@ export class RegisterPlayersComponent implements OnInit, OnDestroy {
 
   savePlayers(): void {
     this.playersService.savePlayers(this.allPlayers);
+    this.menuModeService.toggleMode(false);
   }
 
   deleteAllGamesData(): void {
@@ -78,6 +79,17 @@ export class RegisterPlayersComponent implements OnInit, OnDestroy {
       if (res === 'delete') {
         this.playersService.deleteAllGamesData();
         this.games = [];
+      }
+    });
+  }
+
+  deleteSpecificGame(): void {
+    this.modalsService.openDeleteDialog('all your data will be deleted and you wont be able to restore').
+    afterClosed().subscribe(res => {
+      if (res === 'delete') {
+        this.playersService.deleteCurrentGameData();
+        this.games = this.playersService.readGamesFromLocalStorage();
+        this.allPlayers = [];
       }
     });
   }

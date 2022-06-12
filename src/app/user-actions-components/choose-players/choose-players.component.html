@@ -15,6 +15,7 @@
     <div *ngIf="isSetRatingMode">
       <app-set-rating [notParticipantsPlayers]="notParticipantsPlayers" [chosenPlayersArray]="chosenPlayers"></app-set-rating>
     </div>
+
     <button class="toggle-mode-btn" mat-raised-button color="primary" (click)="toggleRatingMode()">{{linkName}}</button>
   </div>
 </div>
