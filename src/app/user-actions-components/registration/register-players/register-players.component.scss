@@ -6,7 +6,8 @@
   line-height: 2;
 }
 
-.next-page-btn {
-  margin-top: 2rem;
-  margin-right: 0.7rem;
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+  background: gray;
 }

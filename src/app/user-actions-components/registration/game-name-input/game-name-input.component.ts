@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {PlayersService} from '../../../services/players.service';
 import {AlertsService} from '../../../services/alerts.service';
 
@@ -11,7 +11,14 @@ export class GameNameInputComponent implements OnInit {
 
   @Input() optionName = '';
   @Input() games: string[] = [];
+
+  @Output() deleteGameClicked = new EventEmitter();
+
   newName = '';
+
+  get gameName(): any {
+    return this.playersService._gameName;
+  }
 
   constructor(public playersService: PlayersService, private alertsService: AlertsService) { }
 
@@ -44,5 +51,9 @@ export class GameNameInputComponent implements OnInit {
   loadGameName(name: string): void {
     this.playersService.changeGameName(name);
     this.optionName = name;
+  }
+
+  deleteSpecificGame(): void {
+    this.deleteGameClicked.emit();
   }
 }

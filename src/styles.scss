@@ -27,6 +27,15 @@ mat-icon {
   display: flex;
 }
 
+.action-btn {
+  margin-top: 2rem !important;
+  margin-right: 0.7rem !important;
+}
+
+.space-left {
+  margin-left: 0.7rem !important;
+}
+
 @media only screen and (max-width: 600px) {
   .registration-page {
     margin-left: 0.7rem;

@@ -7,7 +7,19 @@
   </div>
 </form>
 
-<select class="select-game-options" (ngModelChange)="loadGameName($event)" [(ngModel)]="optionName">
-  <option [value]="gameName" *ngFor="let gameName of games">{{gameName}}</option>
-</select>
+  <div>
+    <select class="select-game-options" (ngModelChange)="loadGameName($event)" [(ngModel)]="optionName">
+      <option [value]="gameName" *ngFor="let gameName of games">{{gameName}}</option>
+    </select>
+
+    <button *ngIf="gameName | async"
+            (click)="deleteSpecificGame()"
+            class="space-left"
+            mat-stroked-button
+            color="warn">
+      delete {{gameName | async}}
+    </button>
+  </div>
+
+
 </div>

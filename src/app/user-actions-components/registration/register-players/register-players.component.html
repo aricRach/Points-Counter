@@ -6,7 +6,7 @@
     </div>
 
     <div class="section">
-      <app-game-name-input [games]="games" [optionName]="currentGameName"></app-game-name-input>
+      <app-game-name-input (deleteGameClicked)="deleteSpecificGame()" [games]="games" [optionName]="currentGameName"></app-game-name-input>
     </div>
 
     <div *ngIf="currentGameName">
@@ -20,7 +20,8 @@
     </div>
 
     <a
-      class="next-page-btn"
+      [class.disabled]="!(playersService._gameName | async) ? true : null"
+      class="action-btn"
       matTooltip="save your modified data and continue to select players"
       mat-raised-button
       color="primary"
