@@ -4,6 +4,7 @@ import {PlayersService} from '../../services/players.service';
 import {Router} from '@angular/router';
 import {ModalsService} from '../../modals/services/modals.service';
 import {AlertsService} from '../../services/alerts.service';
+import {MenuModeService} from '../../services/menu-mode.service';
 
 @Component({
   selector: 'app-set-rating',
@@ -16,7 +17,8 @@ export class SetRatingComponent implements OnInit {
   @Input() notParticipantsPlayers: Player[] = [];
 
   constructor(private router: Router, public playersService: PlayersService,
-              private modalsService: ModalsService, private alertsService: AlertsService) { }
+              private modalsService: ModalsService, private alertsService: AlertsService,
+              private menuModeService: MenuModeService) { }
 
   ngOnInit(): void {}
 
@@ -44,13 +46,12 @@ export class SetRatingComponent implements OnInit {
     this.alertsService.showSuccess('data saved');
   }
 
-  onDelete(): void {
-    this.modalsService.openDeleteDialog('all your data will be deleted and you wont be able to restore').
-    afterClosed().subscribe(res => {
-      if (res === 'delete') {
-        this.playersService.deleteCurrentGameData();
-        this.router.navigate(['/register-players']);
-      }
-    });
+  private toggleMenu(): void {
+    this.menuModeService.toggleMode(false);
+  }
+
+  goToInsight(): void {
+    this.toggleMenu();
+    this.onSave();
   }
 }

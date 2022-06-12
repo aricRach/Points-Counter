@@ -20,6 +20,15 @@
 </div>
 
 <div class="action-btn">
-<button (click)="onSave()" mat-stroked-button>save</button>
-<button (click)="onDelete()" mat-stroked-button color="warn">delete all saved data for {{playersService._gameName | async}}</button>
+  <a
+    class="action-btn"
+    matTooltip="save and move to see the insights"
+    mat-raised-button
+    color="primary"
+    (click)="goToInsight()"
+    [routerLink]="['/view-insights']">
+    see insights
+  </a>
+  <button class="action-btn" (click)="onSave()" mat-stroked-button>save</button>
 </div>
+
